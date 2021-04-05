@@ -10,9 +10,9 @@ export default function Layout(props) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className="flex">
         <Sidebar />
-        <main>
+        <div>
           <h1>
             Welcome to{" "}
             <Link href="/docs">
@@ -20,9 +20,7 @@ export default function Layout(props) {
             </Link>
           </h1>
           {props.children}
-        </main>
-
-        <footer></footer>
+        </div>
       </div>
     </div>
   );

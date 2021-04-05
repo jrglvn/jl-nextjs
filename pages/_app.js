@@ -1,9 +1,11 @@
+import React from "react";
 import "../styles/globals.css";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme } from "../styles/ThemeConfig";
-import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
+  const Layout = Component.Layout ? Component.Layout : React.Fragment;
+
   return (
     <ThemeProvider theme={lightTheme}>
       <GlobalStyles />

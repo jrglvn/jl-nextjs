@@ -6,9 +6,7 @@ export default function View(props) {
 
   console.log("router: ", router);
 
-  return (
-    <Layout>
-      <div>VIEW compoenent</div>
-    </Layout>
-  );
+  return <div>VIEW compoenent</div>;
 }
+
+View.Layout = Layout;
