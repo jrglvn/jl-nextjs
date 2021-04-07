@@ -1,18 +1,17 @@
 import React from "react";
 import "../styles/globals.css";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles, lightTheme } from "../styles/ThemeConfig";
+import { ChakraProvider } from "@chakra-ui/react";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
-  const Layout = Component.Layout ? Component.Layout : React.Fragment;
+  //  const Layout = Component.Layout || React.Fragment;
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <GlobalStyles />
+    <ChakraProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 }
 

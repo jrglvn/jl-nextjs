@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { FaChevronRight } from "react-icons/fa";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { Box, Flex } from "@chakra-ui/react";
+import Link from "../components/Link";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 import { SIDEBAR_NODE_TREE } from "../mock/data";
 
 export default function Sidebar(props) {
   return (
-    <div className="flex flex-col fixed min- w-64 h-full bg-gray-800 gap-8">
-      <StyledNavLink to="/">Home</StyledNavLink>
-      <div>
+    <Flex flexDirection="column" w="64" h="full" bg="gray.800">
+      <Flex flexDirection="column">
         {SIDEBAR_NODE_TREE.map((node) => (
           <SidebarNode key={node.location} node={node} />
         ))}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 }
 
@@ -24,14 +23,12 @@ const SidebarNode = ({ node, depth = 1, ...props }) => {
 
   return (
     <>
-      <CustomLink
+      <SidebarLink
         node={node}
         depth={depth}
         expanded={expanded}
         onClick={() => setExpanded((prev) => !prev)}
-      >
-        {node.label}
-      </CustomLink>
+      />
 
       {expanded && node.nodes && (
         <div>
@@ -44,55 +41,33 @@ const SidebarNode = ({ node, depth = 1, ...props }) => {
   );
 };
 
-const CustomLink = (props) => {
+const SidebarLink = (props) => {
   const { node, expanded, depth, onClick } = props;
   let router = useRouter();
 
-  console.log("router: ", router);
-
-  const isExact: boolean = node.location === router?.pathname;
+  const isExact: boolean = node.location === router?.asPath;
 
   return (
-    <StyledNodeHeader
-      expanded={expanded}
-      depth={depth}
-      onClick={onClick}
-      isExact={isExact}
+    <Flex
+      pl={depth * 2}
+      bg={isExact ? "gray.600" : "inherit"}
+      alignItems="center"
     >
-      <div style={{ width: "10px" }}>{node.nodes && <FaChevronRight />}</div>
-      <Link href={node.location} passHref>
-        <StyledNavLink>{props.children}</StyledNavLink>
+      {node.nodes ? (
+        <ChevronRightIcon
+        color="white"
+        w="4"
+        h="4"
+        onClick={onClick}
+        transform={expanded && "rotate(90deg)"}
+        transitionDuration=".5s"
+        />
+      ) : (
+        <Box w="4" />
+      )}
+      <Link color="gray.400" href={node.location} ml="1">
+        {node.label}
       </Link>
-    </StyledNodeHeader>
+    </Flex>
   );
 };
-
-const StyledNodeHeader = styled.div.attrs((props) => ({
-  className: `${props.isExact && "bg-gray-600"}`,
-}))<{
-  expanded: boolean;
-  depth: number;
-}>`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: ${({ depth }) => depth * 0.5}rem;
-
-  svg {
-    color: white;
-    font-size: 10px;
-    transform: ${({ expanded }) =>
-      expanded ? "rotate(90deg)" : "rotate(0deg)"};
-    transition: all 0.25s;
-  }
-`;
-
-export const StyledNavLink = styled.a.attrs({
-  className: "text-gray-400",
-})`
-  display: inline-block;
-  width: 100%;
-  &.active {
-    color: white;
-  }
-`;

@@ -5,32 +5,35 @@ export type TSidebarNode = {
 };
 
 export const SIDEBAR_NODE_TREE: Array<TSidebarNode> = [
+  { label: "Home", location: "/" },
   {
     label: "View",
-    location: "/view",
+    location: "/docs/view",
     nodes: [
-      { label: "Search", location: "/view/search" },
+      { label: "Search", location: "/docs/view/search" },
       {
         label: "Appearance",
-        location: "/view/appearance",
-        nodes: [{ label: "Select theme", location: "/view/appearance/themes" }],
+        location: "/docs/view/appearance",
+        nodes: [
+          { label: "Select theme", location: "/docs/view/appearance/themes" },
+        ],
       },
     ],
   },
   {
     label: "Robno",
-    location: "/robno",
+    location: "/docs/robno",
     nodes: [
-      { label: "Izdatnice", location: "/robno/izdatnice" },
-      { label: "Ponude", location: "/robno/ponude" },
+      { label: "Izdatnice", location: "/docs/robno/izdatnice" },
+      { label: "Ponude", location: "/docs/robno/ponude" },
     ],
   },
   {
     label: "Izvještaji",
-    location: "/izvjestaji",
+    location: "/docs/izvjestaji",
     nodes: [
-      { label: "Ulazi robe", location: "/izvjestaji/ulaziRobe" },
-      { label: "Izlazi robe", location: "/izvjestaji/izlaziRobe" },
+      { label: "Ulazi robe", location: "/docs/izvjestaji/ulaziRobe" },
+      { label: "Izlazi robe", location: "/docs/izvjestaji/izlaziRobe" },
     ],
   },
 ];
