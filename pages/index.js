@@ -8,6 +8,7 @@ import {
   FormHelperText,
   Button,
   Box,
+  Stack,
 } from "@chakra-ui/react";
 import { Formik, Field, Form } from "formik";
 
@@ -36,28 +37,34 @@ export default function Home() {
         {(props) => (
           <Box p="4">
             <Form>
-              <Field name="name" validate={validateName}>
-                {({ field, form }) => (
-                  <FormControl
-                    isInvalid={form.errors.name && form.touched.name}
-                  >
-                    <FormLabel htmlFor="name">First name</FormLabel>
-                    <Input size="xs" {...field} id="name" placeholder="name" />
-                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+              <Stack spacing="2">
+                <Field name="name" validate={validateName}>
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.name && form.touched.name}
+                    >
+                      <FormLabel htmlFor="name">First name</FormLabel>
+                      <Input
+                        size="xs"
+                        {...field}
+                        id="name"
+                        placeholder="name"
+                      />
+                      {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     <FormHelperText>
                       Select only if you're a fan.
-                    </FormHelperText>
-                  </FormControl>
-                )}
-              </Field>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={props.isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button>
+                    </FormHelperText> */}
+                    </FormControl>
+                  )}
+                </Field>
+                <Button
+                  colorScheme="orange"
+                  isLoading={props.isSubmitting}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Stack>
             </Form>
           </Box>
         )}
